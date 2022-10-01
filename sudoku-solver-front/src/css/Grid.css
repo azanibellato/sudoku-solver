@@ -3,10 +3,27 @@
     color: black;
     padding: 10px;
     font-size: 35pt;
-    border: 1px solid black;
+    border: 1px solid #222;
     text-align: center;
     vertical-align: middle;
     text-shadow: 2px 2px rgb(173, 173, 173);
+}
+.box.error{
+    color: red;
+    border-color: red;
+}
+
+.box.border-top{
+    border-top: 2px solid black;
+}
+.box.border-bottom{
+    border-bottom: 2px solid black;
+}
+.box.border-left{
+    border-left: 2px solid black;
+}
+.box.border-right{
+    border-right: 2px solid black;
 }
 .grid{
     margin: 0 auto;
