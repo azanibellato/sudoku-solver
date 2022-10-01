@@ -1,18 +1,20 @@
+
 .box {
     color: black;
     padding: 10px;
     font-size: 35pt;
     border: 1px solid black;
-    min-width: calc(11.1111% - 22px);
     text-align: center;
     vertical-align: middle;
     text-shadow: 2px 2px rgb(173, 173, 173);
 }
 .grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     margin: 0 auto;
-    max-width: 60vw;
+    max-width: 900px;
     margin-top: 10px;
+}
+
+.grid-row{
+    display: flex;
+    justify-content: center;
 }
