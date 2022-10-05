@@ -1,0 +1,4 @@
+packages:
+  - sudoku-solver-front
+  - sudoku-solver-back
+  - packages/*
