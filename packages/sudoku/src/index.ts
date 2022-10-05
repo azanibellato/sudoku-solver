@@ -4,12 +4,16 @@ export class SudokuGrid{
     size: number;
 
     constructor(size:number, data?:number[][]){
+        if (size<=1 && !Number.isInteger(Math.sqrt(size)))
+            throw new Error("Size must be a perfect square greater than 1");
         this.size = size;
         if (data)
             this.data = data;
-        else
-            this.data = new Array(this.size).fill(new Array(this.size).fill(null));
-    
+        else {
+            this.data = new Array(this.size);
+            for (let i = 0; i < this.size; i++)
+                this.data[i] = new Array(this.size).fill(null); 
+        }
     }    
     
     /**
@@ -20,32 +24,12 @@ export class SudokuGrid{
      */
     numberIsValid(row:number, col:number):boolean {
         const data = this.data;
+        if (this.data[row][col]==null) 
+            return true; //Null values are valid
 
-        // We don't check null values
-        if (data[row][col]==null) return true;
-
-        //Check row
-        for (let j=0; j<data.length; j++){ 
-            if (j!==col && data[row][j]===data[row][col]) 
+        for (const [i,j] of this.cellsToCheck(row, col))
+            if (this.data[row][col]==this.data[i][j])
                 return false;
-        }
-
-        //Check column
-        for (let i=0; i<data.length; i++){ 
-            if (i!==row && data[i][col]===data[row][col]) 
-            return false;
-        }
-
-        // Check subgrid (square)
-        const squareSize = Math.sqrt(data.length);
-        const rowSquareStart = Math.floor(row/squareSize) * squareSize;
-        const colSquareStart = Math.floor(col/squareSize) * squareSize;
-        for (let i=rowSquareStart; i<rowSquareStart+squareSize; i++){
-            for (let j=colSquareStart; j<colSquareStart+squareSize; j++){
-                if ((i!==row || j!==col) && data[i][j]===data[row][col]) 
-                    return false;
-            }
-        }
 
         //No errors, number is valid
         return true;
@@ -79,4 +63,73 @@ export class SudokuGrid{
         newData[rowIndex][colIndex]=value; 
         return new SudokuGrid(this.size, newData);
     }
+
+    cellsToCheck(rowIndex:number, colIndex:number):number[][]{
+        const cellIndexes = new Array();
+
+        //Check row
+        for (let j=0; j<this.size; j++){
+            if (j!==colIndex)
+                cellIndexes.push([rowIndex,j]);
+        }
+
+        //Check column
+        for (let i=0; i<this.size; i++){
+            if (i!==rowIndex)
+                cellIndexes.push([i,colIndex]);
+        }
+
+        // Check subgrid (square)
+        const squareSize = Math.sqrt(this.size);
+        const rowSquareStart = Math.floor(rowIndex/squareSize) * squareSize;
+        const colSquareStart = Math.floor(colIndex/squareSize) * squareSize;
+        for (let i=rowSquareStart; i<rowSquareStart+squareSize; i++){
+            for (let j=colSquareStart; j<colSquareStart+squareSize; j++){
+                if (i!==rowIndex && j!==colIndex)
+                    cellIndexes.push([i,j]);
+            }
+        }
+
+        return cellIndexes;
+    }
+}
+
+class SudokuOptions{
+    grid: SudokuGrid;
+    options: number[][][];
+
+    constructor(grid: SudokuGrid){
+        this.grid = grid;
+        this.options = new Array(this.grid.size);
+        for (let i=0; i<this.grid.size; i++){
+            this.options[i] = new Array(this.grid.size);
+            for (let j=0; j<this.grid.size; j++){
+                this.options[i][j] = new Array();
+                if (this.grid.data[i][j]!=null)
+                    this.options[i][j].push(this.grid.data[i][j]); //If already filled, the option is set
+                else // Otherwise, we need to check what options are available
+                    for (let z=1; z<=this.grid.size; z++){
+                        const testGrid = this.grid.setNewValue(i,j,z);
+                        if (testGrid.numberIsValid(i,j))
+                            this.options[i][j].push(z);
+                    }
+            }
+        }
+    }
+
+    tryRemoveOption(row:number, col:number, value:number){
+        if (this.options[row][col].length<=1)
+        return null; //Contradiction - we cannot remove the last option
+        const reducedOptions = this.options[row][col].filter(val=>val!==value);
+        if (reducedOptions.length == 1){
+            const lastOption = reducedOptions[0];
+
+        }
+            
+        
+        
+        
+    }
+
+    
 }
