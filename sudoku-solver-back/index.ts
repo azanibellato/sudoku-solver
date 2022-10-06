@@ -21,7 +21,6 @@ app.post('/api/sudoku-solver', (req: Request, res: Response) => {
   }
     
   const grid = new SudokuGrid(gridData.size, gridData.data);
-  console.log(grid);
   const solution = grid.solve();
   if (solution)
     res.send({solved: true, solution: solution.data});
