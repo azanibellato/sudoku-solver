@@ -20,3 +20,7 @@ The main Sudoku logic is in a TypeScript shared package (packages/sudoku).
 From the project root directory run ```pnpm start```.
 
 Frontend should run on `http://localhost:3000`, the backend is available `http://localhost:3030`.
+
+## Testing
+Most of the testing is for the Sudoku logic in `packages/sudoku`.
+To run the tests, go to the `packages/sudoku` directory and type ```pnpm test```.
