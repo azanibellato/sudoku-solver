@@ -1,6 +1,6 @@
 import Box from './Box';
 import '../css/Grid.css';
-import {SudokuGrid} from 'sudoku';
+import {SudokuGrid, CellValue} from 'sudoku';
 
 type GridProps = {
     size: number;  
@@ -12,11 +12,11 @@ type GridProps = {
 function Grid(props: GridProps){
     
     const rows = props.grid.data.map(
-        (row:number[], rowIndex:number)=> 
+        (row:CellValue[], rowIndex:number)=> 
             (<div className="grid-row" key={rowIndex}>
-                {row.map( (el:number, colIndex:number)=> 
+                {row.map( (el:CellValue, colIndex:number)=> 
                     (<Box onChange={props.changeNumber} row={rowIndex} col={colIndex} max={props.size}
-                        value={el} key={rowIndex*props.size+colIndex} error={!props.grid.numberIsValid(rowIndex, colIndex)}/>)) }
+                        value={el} key={rowIndex*props.size+colIndex} error={!props.grid.numberIsValid({row: rowIndex, col: colIndex})}/>)) }
             </div>)
         );
 

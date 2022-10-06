@@ -1,6 +1,7 @@
+import { CellValue } from "sudoku";
 
 type BoxProps = {
-    value: number;
+    value: CellValue;
     row: number;
     col: number;
     max: number;
