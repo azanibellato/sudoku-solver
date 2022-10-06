@@ -169,11 +169,8 @@ export function tryRemoveOptionValue(options:SudokuOptions, cellIndex:CellIndex,
         if (possibleCells.length==0) // There is no place for that value in the row/col/subgrid - contradiction!
             return null;
         if (possibleCells.length==1) // There is exactly one place for that value in the row/col/subgrid
-            if (!trySetOptionValue(options, possibleCells[0], value)) { // Try to see if we can place it there
-                console.log(`not possible in ${possibleCells[0].row},${possibleCells[0].col} for ${value}`);
-                return null; //If not possible, stop
-            }
-                
+            if (!trySetOptionValue(options, possibleCells[0], value)) // Try to see if we can place it there
+                return null; //If not possible, stop                
     }
     
     return options;

@@ -72,7 +72,7 @@ describe('Sudoku solver solves correctly', ()=>{
     });
 
 
-    test('solve Easy sudoku unique solution', ()=>{
+    test('solve easy Sudoku with unique solution', ()=>{
         const easySudokuSolution = [
             [4,8,3,9,2,1,6,5,7],
             [9,6,7,3,4,5,8,2,1],
@@ -90,5 +90,37 @@ describe('Sudoku solver solves correctly', ()=>{
         expect(solution).not.toBeNull();
         if (solution!=null)
             expect(solution.data).toEqual(easySudokuSolution);
+    });
+
+    test('solve hard Sudoku with unique solution', ()=>{
+        const hardSudoku = [
+            [null,null,null,null,1,4,null,null,null],
+            [null,3,null,null,null,null,2,null,null],
+            [null,7,null,null,null,null,null,null,null],
+            [null,null,null,9,null,null,null,3,null],
+            [6,null,1,null,null,null,null,null,null],
+            [null,null,null,null,null,null,null,8,null],
+            [2,null,null,null,null,null,1,null,4],
+            [null,null,null,null,5,null,6,null,null],
+            [null,null,null,7,null,8,null,null,null]
+        ];
+
+        const hardSudokuSolution = [
+            [9,6,2,3,1,4,8,5,7],
+            [1,3,4,5,8,7,2,6,9],
+            [5,7,8,2,9,6,4,1,3],
+            [8,4,7,9,6,2,5,3,1],
+            [6,5,1,8,7,3,9,4,2],
+            [3,2,9,1,4,5,7,8,6],
+            [2,8,5,6,3,9,1,7,4],
+            [7,9,3,4,5,1,6,2,8],
+            [4,1,6,7,2,8,3,9,5]
+        ];
+
+        const grid = new SudokuGrid(STANDARD_GRID_SIZE, hardSudoku);
+        const solution = grid.solve();
+        expect(solution).not.toBeNull();
+        if (solution!=null)
+            expect(solution.data).toEqual(hardSudokuSolution);
     });
 });
