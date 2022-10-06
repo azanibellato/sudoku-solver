@@ -2,7 +2,7 @@ import Box from './Box';
 import '../css/Grid.css';
 import {SudokuGrid, CellValue} from 'sudoku';
 
-type GridProps = {
+export type GridProps = {
     size: number;  
     grid: SudokuGrid;
     solution: SudokuGrid | null;
@@ -24,7 +24,7 @@ function Grid(props: GridProps){
         );
 
     return (
-    <div className="grid">
+    <div className="grid" data-testid="grid">
         {rows}
     </div>
     ); 
