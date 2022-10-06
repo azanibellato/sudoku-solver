@@ -17,6 +17,7 @@ function Grid(props: GridProps){
             (<div className="grid-row" key={rowIndex}>
                 {row.map( (el:CellValue, colIndex:number)=> 
                     (<Box onChange={props.changeNumber} row={rowIndex} col={colIndex} max={props.size}
+                        hasSolution={props.solution!==null}
                         isSolution={props.solution? (props.solution.data[rowIndex][colIndex]!==el) : false}
                         value={props.solution? props.solution.data[rowIndex][colIndex] : el} key={rowIndex*props.size+colIndex} error={!props.grid.numberIsValid({row: rowIndex, col: colIndex})}/>)) }
             </div>)

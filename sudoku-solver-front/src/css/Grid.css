@@ -8,12 +8,14 @@
     vertical-align: middle;
     text-shadow: 2px 2px rgb(173, 173, 173);
 }
+
+.box.solution{
+    color: darkgreen;
+}
+
 .box.error{
     color: red;
     border-color: red;
-}
-.box.solution{
-    color: darkgreen;
 }
 
 .box.border-top{

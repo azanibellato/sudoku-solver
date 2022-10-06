@@ -7,6 +7,7 @@ type BoxProps = {
     max: number;
     error: boolean;
     isSolution: boolean;
+    hasSolution: boolean;
     onChange: (event: React.ChangeEvent<HTMLInputElement>, row: number, col: number) => void;
 };
 
@@ -26,7 +27,7 @@ function Box(props: BoxProps){
     const classes = classesArray.join(" ");
 
     return <input 
-        disabled={props.isSolution}
+        disabled={props.hasSolution}
         type="number"
         className={classes}
         min="1"

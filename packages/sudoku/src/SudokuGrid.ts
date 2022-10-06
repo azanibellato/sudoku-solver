@@ -70,8 +70,14 @@ export class SudokuGrid{
     }
 
     solve(){
+        if (this.isEmpty())
+            this.data[0][0]=1; // To avoid issues with completely empty grids, solve by starting to set the first value
         const options = new SudokuOptions(this);
         return searchSolution(options);
+    }
+
+    isEmpty(){
+        return (this.data.every(row=>row.every(cell=>cell===null)));
     }
 }
 

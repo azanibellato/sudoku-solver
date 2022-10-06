@@ -21,8 +21,8 @@ function App() {
   };
 
   useEffect(()=>{
-    setIsSolveUsable(gridData.gridIsValid());
-  }, [gridData]);
+    setIsSolveUsable(solutionData==null && (!gridData.isEmpty())  && gridData.gridIsValid());
+  }, [gridData, solutionData]);
 
   const solveGrid = () => {
 
