@@ -12,6 +12,9 @@
     color: red;
     border-color: red;
 }
+.box.solution{
+    color: darkgreen;
+}
 
 .box.border-top{
     border-top: 2px solid black;

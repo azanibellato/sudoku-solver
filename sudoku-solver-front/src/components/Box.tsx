@@ -6,21 +6,27 @@ type BoxProps = {
     col: number;
     max: number;
     error: boolean;
+    isSolution: boolean;
     onChange: (event: React.ChangeEvent<HTMLInputElement>, row: number, col: number) => void;
 };
 
 function Box(props: BoxProps){
     const squareSize = Math.sqrt(props.max);
     //Borders
-    const borderTop = (props.row % squareSize===0) ? ' border-top' : '';
-    const borderBottom = (props.row % squareSize===2)? ' border-bottom' : '';
-    const borderLeft = (props.col % squareSize===0)? ' border-left' : '';
-    const borderRight = (props.col % squareSize===2)? ' border-right' : '';
-    const error = (props.error) ? ' error' : '';
+    const classesArray = ['box'];
+    if (props.row % squareSize===0) classesArray.push('border-top');
+    if (props.row % squareSize===2) classesArray.push('border-bottom');
+    if (props.col % squareSize===0) classesArray.push('border-left');
+    if (props.col % squareSize===2) classesArray.push('border-right');
+
+    //Other classes
+    if (props.error) classesArray.push('error');
+    if (props.isSolution) classesArray.push('solution');
     // CSS classes
-    const classes =`box${borderTop}${borderBottom}${borderLeft}${borderRight}${error}`;
+    const classes = classesArray.join(" ");
 
     return <input 
+        disabled={props.isSolution}
         type="number"
         className={classes}
         min="1"

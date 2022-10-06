@@ -5,6 +5,7 @@ import {SudokuGrid, CellValue} from 'sudoku';
 type GridProps = {
     size: number;  
     grid: SudokuGrid;
+    solution: SudokuGrid | null;
     changeNumber: (event: React.ChangeEvent<HTMLInputElement>, row: number, col: number) => void;
 };
 
@@ -16,7 +17,8 @@ function Grid(props: GridProps){
             (<div className="grid-row" key={rowIndex}>
                 {row.map( (el:CellValue, colIndex:number)=> 
                     (<Box onChange={props.changeNumber} row={rowIndex} col={colIndex} max={props.size}
-                        value={el} key={rowIndex*props.size+colIndex} error={!props.grid.numberIsValid({row: rowIndex, col: colIndex})}/>)) }
+                        isSolution={props.solution? (props.solution.data[rowIndex][colIndex]!==el) : false}
+                        value={props.solution? props.solution.data[rowIndex][colIndex] : el} key={rowIndex*props.size+colIndex} error={!props.grid.numberIsValid({row: rowIndex, col: colIndex})}/>)) }
             </div>)
         );
 
