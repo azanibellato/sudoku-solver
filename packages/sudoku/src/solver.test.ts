@@ -92,6 +92,31 @@ describe('Sudoku solver solves correctly', ()=>{
             expect(solution.data).toEqual(easySudokuSolution);
     });
 
+    test('solve empty Sudoku should give a valid solution', ()=>{
+        const grid = new SudokuGrid(STANDARD_GRID_SIZE);
+        const solution = grid.solve();
+        expect(solution).not.toBeNull();
+        expect(solution?.gridIsValid()).toBe(true);
+    })
+
+    test('solve partial Sudoku with multiple solution should give a valid solution', ()=>{
+        const partialSudoku = [
+            [null,null,null,null,1,null,null,null,null],
+            [null,null,null,null,null,null,2,null,null],
+            [null,null,null,null,null,null,null,null,null],
+            [null,null,null,null,null,null,null,3,null],
+            [null,null,null,null,null,null,null,null,null],
+            [null,null,null,null,null,null,null,null,null],
+            [null,null,null,null,null,null,null,null,null],
+            [null,null,null,null,null,null,null,null,null],
+            [null,null,null,null,null,null,null,null,null]
+        ];
+        const grid = new SudokuGrid(STANDARD_GRID_SIZE, partialSudoku);
+        const solution = grid.solve();
+        expect(solution).not.toBeNull();
+        expect(solution?.gridIsValid()).toBe(true);
+    })
+
     test('solve hard Sudoku with unique solution', ()=>{
         const hardSudoku = [
             [null,null,null,null,1,4,null,null,null],
