@@ -24,3 +24,4 @@ Frontend should run on `http://localhost:3000`, the backend is available `http:/
 ## Testing
 Most of the testing is for the Sudoku logic in `packages/sudoku`.
 To run the tests, go to the `packages/sudoku` directory and type ```pnpm test```.
+Notice: there seems to be a bug with pnpm that requires to run ```npm install`` from the `packages/sudoku` directory before the first time running the tests to actually have `ts-jest` available.
